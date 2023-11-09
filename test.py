@@ -1,6 +1,16 @@
 import pytest
 from main import fibonacci_numbers, bubble_sort, calculator
 
+# Добавь параметры для генерации отчета
+@pytest.fixture(scope="session")
+def pytest_html_results_table_header():
+    return ["Тест", "Результат", "Доп. информация"]
+
+@pytest.fixture(scope="session")
+def pytest_html_results_table_row(report):
+    return [report.nodeid, report.outcome, report.longreprtext]
+
+
 # Тесты для функции fibonacci_numbers
 def test_fibonacci_numbers_zero(): # проверка на входные данные 0
     result = fibonacci_numbers(0)
